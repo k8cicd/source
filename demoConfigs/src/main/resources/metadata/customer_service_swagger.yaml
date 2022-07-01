@@ -1,0 +1,38 @@
+openapi: 3.0.1
+info:
+  title: customer_service
+  description: API Definition of customer_service
+  version: 1.0.0
+servers:
+- url: http://localhost:8290/customer_service
+paths:
+  /customer:
+    post:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response
+  /customer/contact:
+    post:
+      requestBody:
+        description: Sample Payload
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payload:
+                  type: object
+        required: false
+      responses:
+        default:
+          description: Default response
