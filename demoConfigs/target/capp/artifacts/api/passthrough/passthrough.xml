@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/passthrough" name="passthrough" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="GET">
+        <inSequence>
+            <respond description="respond"/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

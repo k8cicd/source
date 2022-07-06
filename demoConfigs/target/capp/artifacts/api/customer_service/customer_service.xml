@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/customer_service" name="customer_service" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST" uri-template="/customer">
+        <inSequence>
+            <log description="requestLog"/>
+            <property description="get_customerName" expression="json-eval($.customerName)" name="uri.var.customerName" scope="default" type="STRING"/>
+            <call>
+                <endpoint>
+                    <http method="get" uri-template="http://localhost:8080/external/rest/customer/{uri.var.customerName}">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                </endpoint>
+            </call>
+            <filter regex="500" source="get-property('axis2', 'HTTP_SC')">
+                <then>
+                    <payloadFactory description="JSON_to_XML" media-type="xml">
+                        <format>
+                            <m:CustomerDetailsError xmlns:m="http://services.samples/xsd">
+                                <m:ErrorMessage>$1</m:ErrorMessage>
+                            </m:CustomerDetailsError>
+                        </format>
+                        <args>
+                            <arg evaluator="json" expression="$.message"/>
+                        </args>
+                    </payloadFactory>
+                    <respond description="respond_error_msg_to_client"/>
+                </then>
+                <else>
+                    <payloadFactory description="JSON_to_XML" media-type="xml">
+                        <format>
+                            <m:CustomerDetails xmlns:m="http://services.samples/xsd">
+                                <m:FirstName>$1</m:FirstName>
+                                <m:City>$2</m:City>
+                                <m:AccountNumber>$3</m:AccountNumber>
+                                <m:externalServiceResponse>true</m:externalServiceResponse>
+                            </m:CustomerDetails>
+                        </format>
+                        <args>
+                            <arg evaluator="json" expression="$.name"/>
+                            <arg evaluator="json" expression="$.city"/>
+                            <arg evaluator="json" expression="$.account"/>
+                        </args>
+                    </payloadFactory>
+                    <respond description="respond_to_client"/>
+                </else>
+            </filter>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="POST" uri-template="/customer/contact">
+        <inSequence>
+            <property description="get_customerName" expression="json-eval($.customerName)" name="uri.var.customerName" scope="default" type="STRING"/>
+            <call>
+                <endpoint>
+                    <http method="get" uri-template="http://localhost:8080/external/rest/customer/{uri.var.customerName}/contact">
+                        <suspendOnFailure>
+                            <initialDuration>-1</initialDuration>
+                            <progressionFactor>-1</progressionFactor>
+                            <maximumDuration>0</maximumDuration>
+                        </suspendOnFailure>
+                        <markForSuspension>
+                            <retriesBeforeSuspension>0</retriesBeforeSuspension>
+                        </markForSuspension>
+                    </http>
+                </endpoint>
+            </call>
+            <payloadFactory description="JSON_to_XML" media-type="xml">
+                <format>
+                    <m:CustomerDetails xmlns:m="http://services.samples/xsd">
+                        <m:FirstName>$1</m:FirstName>
+                        <m:ContactNumber>$2</m:ContactNumber>
+                        <m:externalServiceResponse>true</m:externalServiceResponse>
+                    </m:CustomerDetails>
+                </format>
+                <args>
+                    <arg evaluator="json" expression="$.name"/>
+                    <arg evaluator="json" expression="$.contact"/>
+                </args>
+            </payloadFactory>
+            <respond description="respond_to_client"/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,10 @@
+---
+key: "customer_service-1.0.0"
+name : "customer_service"
+displayName : "customer_service"
+description: "Sample API"
+version: "1.0.0"
+serviceUrl: "http://localhost:8290/customer_service"
+definitionType: "OAS3"
+securityType: "BASIC"
+mutualSSLEnabled: false
