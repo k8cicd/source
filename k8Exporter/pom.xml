@@ -45,6 +45,22 @@
           
     </properties>
       
+    <dependencies>
+            
+        <dependency>
+                  
+            <groupId>com.demo</groupId>
+                  
+            <artifactId>demoCompositeExporter</artifactId>
+                  
+            <version>1.0.0-SNAPSHOT</version>
+                  
+            <type>car</type>
+                
+        </dependency>
+          
+    </dependencies>
+      
     <repositories>
             
         <repository>
