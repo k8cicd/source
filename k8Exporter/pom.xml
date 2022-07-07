@@ -9,7 +9,7 @@
             
         <artifactId>demo</artifactId>
             
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
           
     </parent>
       
@@ -17,7 +17,7 @@
       
     <artifactId>k8Exporter</artifactId>
       
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
       
     <name>k8Exporter</name>
       
@@ -53,7 +53,7 @@
                   
             <artifactId>demoCompositeExporter</artifactId>
                   
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
                   
             <type>car</type>
                 
@@ -117,7 +117,7 @@
                         
                 <configuration>
                               
-                    <buildcommands/>
+                    <buildcommands />
                               
                     <projectnatures>
                                     
@@ -193,7 +193,7 @@
                             
                 </executions>
                         
-                <configuration/>
+                <configuration />
                       
             </plugin>
                   
@@ -243,7 +243,7 @@
                             
                 </executions>
                         
-                <configuration/>
+                <configuration />
                       
             </plugin>
                   
@@ -317,7 +317,7 @@
                             
                 </executions>
                         
-                <configuration/>
+                <configuration />
                       
             </plugin>
                 
