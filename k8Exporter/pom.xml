@@ -41,7 +41,7 @@
 
         <dockerfile.repository>ramilu90/wso2mi-4.1.0</dockerfile.repository>
 
-        <dockerfile.tag>1.0.0</dockerfile.tag>
+        <dockerfile.tag>1.0.1</dockerfile.tag>
 
     </properties>
 
